@@ -15,6 +15,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 		public AvatarClassBarbarian(ChanceProvider chanceProvider)
 			: base(3, 2, 8, 2, new ChanceMovementBehavior(chanceProvider, 2), "Images/MapTiles/HeroBarbarian.png", "Barbarian")
 		{
+			ActionStrategies.Add(new AggressiveCombatStrategy());
 			ActionStrategies.Add(new SearchForCurrentTileActionsStrategy());
 			ActionStrategies.Add(new SearchForInterestingLocationsStrategy());
 			ActionStrategies.Add(new SearchForAdjacentUnvisitedLocationsStrategy());

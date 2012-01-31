@@ -68,6 +68,7 @@
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\actionStrategies\SearchForCurrentTileActionsStrategy.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\actionStrategies\AggressiveCombatStrategy.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\actionStrategies\SearchForInterestingLocationsStrategy.cs" />
+    <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\actionStrategies\SearchForVisibleEnemiesStrategy.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\Avatar.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\avatarClasses\AvatarClassDwarf.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\avatarClasses\AvatarClassElf.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\quests\maps\tiles\WallVerticalLeftTile.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\quests\maps\tiles\WallVerticalRightTile.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\turnStepAction\ActionableTurnStepAction.cs" />
+    <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\turnStepAction\AttackAction.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\game\turnStepAction\ConfusedTurnStepAction.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\PointList.cs" />
     <Compile Include="com\meddlingwithfire\wintereenmasDelve2012\model\TwoLinkedPoints.cs" />

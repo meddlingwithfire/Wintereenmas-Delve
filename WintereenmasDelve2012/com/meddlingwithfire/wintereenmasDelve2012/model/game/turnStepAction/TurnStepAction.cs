@@ -7,6 +7,7 @@ using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game;
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model.game.quests.maps;
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.storyTelling;
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.quests;
+using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.chance;
 
 namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model.game.turnStepAction
 {
@@ -28,7 +29,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 			RequiresMovement = false;
 		}
 
-		public virtual void Commit(AbstractQuest map, StoryTeller storyTeller)
+		public virtual void Commit(AbstractQuest map, StoryTeller storyTeller, ChanceProvider chanceProvider)
 		{ } // Override with subclasses
 
 		protected void DoComplete()

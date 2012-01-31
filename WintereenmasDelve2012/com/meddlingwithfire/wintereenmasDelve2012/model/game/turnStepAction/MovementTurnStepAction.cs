@@ -7,6 +7,7 @@ using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.ques
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model.game.quests.maps;
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.storyTelling;
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.quests;
+using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.chance;
 
 namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model.game.turnStepAction
 {
@@ -27,7 +28,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 			AcceptsAvatarFocus = HasMoreTurns;
 		}
 
-		override public void Commit(AbstractQuest quest, StoryTeller storyTeller)
+		override public void Commit(AbstractQuest quest, StoryTeller storyTeller, ChanceProvider chanceProvider)
 		{
 			//Story story = new Story();
 			//story.Add(storyTeller.NarratorVoice, _avatar.ClassDescription + " moves");

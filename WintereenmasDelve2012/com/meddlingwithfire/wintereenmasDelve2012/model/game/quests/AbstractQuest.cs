@@ -15,12 +15,12 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.
 
 		public QuestMap Map;
 
-		public List<Hero> Heroes;
-		public List<Monster> Monsters;
+		public List<Avatar> Heroes;
+		public List<Avatar> Monsters;
 
 		private Dictionary<Avatar, MapTile> _avatarMapTiles;
 		
-		public AbstractQuest(Point mapStaircaseOrigin, List<Hero> heroes)
+		public AbstractQuest(Point mapStaircaseOrigin, List<Avatar> heroes)
 			: base()
 		{
 			_avatarMapTiles = new Dictionary<Avatar, MapTile>();
@@ -41,7 +41,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.
 				counter++;
 			}
 
-			Monsters = new List<Monster>();
+			Monsters = new List<Avatar>();
 		}
 
 		public Point GetAvatarLocation(Avatar avatar)
@@ -70,11 +70,36 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.
 			{
 				foreach (Hero hero in Heroes)
 				{
-					if (hero.IsHeroAlive)
+					if (hero.IsAlive)
 					{ return true; }
 				}
 				return false;
 			}
+		}
+
+		public List<Avatar> TurnTakers
+		{
+			get
+			{
+				List<Avatar> turnTakers = new List<Avatar>();
+				for (int i = 0; i < Heroes.Count; i++)
+				{ turnTakers.Add(Heroes[i]); }
+				for (int i = 0; i < Monsters.Count; i++)
+				{ turnTakers.Add(Monsters[i]); }
+				return turnTakers;
+			}
+		}
+
+		public void RemoveAvatar(Avatar avatar)
+		{
+			if (Heroes.Contains(avatar))
+			{ Heroes.Remove(avatar); }
+			if (Monsters.Contains(avatar))
+			{ Monsters.Remove(avatar); }
+
+			// Remove their map tile
+			MapTile tile = _avatarMapTiles[avatar];
+			Map.RemoveMapTile(tile);
 		}
 
 		public List<Avatar> GetEnemiesOfAvatar(Avatar avatar)

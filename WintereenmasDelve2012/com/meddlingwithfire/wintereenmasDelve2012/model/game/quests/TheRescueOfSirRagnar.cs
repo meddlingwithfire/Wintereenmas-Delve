@@ -8,7 +8,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.
 {
 	public class TheRescueOfSirRagnar : AbstractQuest
 	{
-		public TheRescueOfSirRagnar(List<Hero> heroes)
+		public TheRescueOfSirRagnar(List<Avatar> heroes)
 			: base(new Point(10, 7), heroes)
 		{
 			//Introduction = new Story();

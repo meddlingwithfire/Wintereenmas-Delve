@@ -12,7 +12,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.
 {
 	public class TheTrial : AbstractQuest
 	{
-		public TheTrial(List<Hero> heroes):base(new Point(1, 14), heroes)
+		public TheTrial(List<Avatar> heroes):base(new Point(1, 14), heroes)
 		{
 			// Configure the story
 			StoryTeller storyTeller = new StoryTeller();
@@ -65,6 +65,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.
 
 			//AddMonster(new Monster(new AvatarClassOrc()), new Point(7, 14));
 			//AddMonster(new Monster(new AvatarClassOrc()), new Point(8, 15));
+			AddMonster(new Monster(new AvatarClassOrc()), new Point(3, 17));
 		}
 	}
 }

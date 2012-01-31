@@ -18,7 +18,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game
 
 		private List<AbstractQuest> _quests;
 
-		private List<Hero> _heroes;
+		private List<Avatar> _heroes;
 		
 		public MasterController(NavigationService navigationService)
 			: base()
@@ -36,8 +36,11 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game
 
 			// This skips straight to the QuestView
 			List<ChanceSubmission> submissions = new List<ChanceSubmission>();
-			submissions.Add(new ChanceSubmission() { SubmitterName = "Jonathon", Value = 6 });
-			submissions.Add(new ChanceSubmission() { SubmitterName = "Jonathon", Value = 6 });
+			submissions.Add(new ChanceSubmission() { SubmitterName = "Jonathon", Value = 1 });
+			submissions.Add(new ChanceSubmission() { SubmitterName = "Jonathon", Value = 2 });
+			submissions.Add(new ChanceSubmission() { SubmitterName = "Jonathon", Value = 3 });
+			submissions.Add(new ChanceSubmission() { SubmitterName = "Jonathon", Value = 4 });
+			submissions.Add(new ChanceSubmission() { SubmitterName = "Jonathon", Value = 5 });
 			submissions.Add(new ChanceSubmission() { SubmitterName = "Jonathon", Value = 6 });
 			_chanceProvider = new ChanceProvider(submissions);
 			OnGameIntroductionComplete(null, null);
@@ -61,9 +64,9 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game
 		private void OnGameIntroductionComplete(object sender, EventArgs args)
 		{
 			// Fire up the first Quest!
-			_heroes = new List<Hero>();
+			_heroes = new List<Avatar>();
 			_heroes.Add(new Hero(new AvatarClassBarbarian(_chanceProvider)));
-			_heroes.Add(new Hero(new AvatarClassDwarf(_chanceProvider)));
+			//_heroes.Add(new Hero(new AvatarClassDwarf(_chanceProvider)));
 			//_heroes.Add(new Hero(new AvatarClassElf(_chanceProvider)));
 			//_heroes.Add(new Hero(new AvatarClassWizard(_chanceProvider)));
 

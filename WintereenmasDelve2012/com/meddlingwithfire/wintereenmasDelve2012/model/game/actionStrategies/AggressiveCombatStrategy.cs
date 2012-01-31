@@ -11,7 +11,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 	public class AggressiveCombatStrategy : AbstractActionStrategy
 	{
 		/// <summary>
-		/// Searches visible tiles for Avatars of the opposite faction.
+		/// Attacks any enemy within swinging range.
 		/// </summary>
 		public AggressiveCombatStrategy()
 			: base(true)
@@ -21,7 +21,15 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 		{
 			List<Avatar> enemies = mapAnalyzer.GetAdjacentEnemies(currentAvatar, currentAvatar.CanAttackAdjacent);
 
-			return null;
+			if (enemies.Count <= 0)
+			{ return null; }
+
+			// TODO: Determine which enemy to attack
+
+			// Attack enemy action
+			AttackAction action = new AttackAction(currentAvatar, enemies[0]);
+
+			return action;
 		}
 	}
 }

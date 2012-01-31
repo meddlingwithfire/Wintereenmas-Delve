@@ -65,14 +65,46 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game
 		public void BreakFocus()
 		{ _focusAction = null; }
 
-		public void DefendAgainst(int attackDamageRolled, ChanceProvider chanceProvider)
+		public int RollAttack(ChanceProvider chanceProvider)
+		{
+			// TODO calculate how many attack dice the Avatar has
+			int numberOfAttackDiceToRoll = 3;
+
+			int totalAttackHitsRolled = 0;
+			for (int i = 0; i < numberOfAttackDiceToRoll; i++)
+			{
+				int roll = chanceProvider.NextSubmission().Value;
+				if (roll <= 3) // TODO: Determine actual odds from game dice
+				{ totalAttackHitsRolled++; }
+			}
+
+			return totalAttackHitsRolled;
+		}
+
+		public int RollDefense(ChanceProvider chanceProvider)
 		{
 			BreakFocus(); // If the Avatar is hit, break the focus of the Avatar.
 
-			// TODO: Defend!
+			// TODO: Calculate how many defend dice the avatar has
+			int numberOfDefendDiceToRoll = 3;
+
+			int totalShieldDiceRolled = 0;
+			for (int i = 0; i < numberOfDefendDiceToRoll; i++)
+			{
+				int roll = chanceProvider.NextSubmission().Value;
+				if (roll <= 3) // TODO: Determine actual odds from game dice
+				{ totalShieldDiceRolled++; }
+			}
+
+			return totalShieldDiceRolled;
 		}
 
-		public Boolean IsHeroAlive
+		public void TakeBodyDamage(int bodyDamage)
+		{
+			ActualBodyPointsRemaining -= bodyDamage;
+		}
+
+		public Boolean IsAlive
 		{
 			get { return ActualBodyPointsRemaining > 0; }
 		}
@@ -102,7 +134,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game
 
 		virtual public TurnStepAction DoTakeTurnStep(QuestAnalyzer mapAnalyzer, ChanceProvider chanceProvider)
 		{
-			if (!IsHeroAlive) // Can't play if dead.
+			if (!IsAlive) // Can't play if dead.
 			{
 				if (_sentDeathMessage)
 				{ return null; }

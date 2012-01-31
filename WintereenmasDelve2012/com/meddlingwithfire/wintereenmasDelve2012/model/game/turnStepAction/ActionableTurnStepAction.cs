@@ -8,6 +8,7 @@ using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game;
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model.game.quests.maps;
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.storyTelling;
 using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game.quests;
+using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.chance;
 
 namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model.game.turnStepAction
 {
@@ -22,7 +23,7 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 			_avatar = avatar;
 		}
 
-		override public void Commit(AbstractQuest quest, StoryTeller storyTeller)
+		override public void Commit(AbstractQuest quest, StoryTeller storyTeller, ChanceProvider chanceProvider)
 		{
 			if (_tileAction is IRequiresModifiableMap)
 			{ ((IRequiresModifiableMap)_tileAction).SetModifiableMap(quest.Map); }

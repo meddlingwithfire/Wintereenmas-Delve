@@ -40,9 +40,7 @@ namespace WintereenmasDelve2012
 		public EventHandler HeroesWin;
 		public EventHandler HeroesLose;
 
-		private List<Avatar> _turnTakers;
 		private Avatar _currentTurnTaker;
-		private int _currentTurnTakerIndex;
 
 		private QuestAnalyzer _questAnalyzer;
 		private DispatcherTimer _turnTimer;
@@ -54,10 +52,8 @@ namespace WintereenmasDelve2012
 			_quest = quest;
 			_chanceProvider = chanceProvider;
 			_storyTeller = storyTeller;
-
-			_turnTakers = new List<Avatar>();
+			
 			_currentTurnTaker = null;
-			_currentTurnTakerIndex = -1;
 
 			_turnTimer = new DispatcherTimer();
 			_turnTimer.Interval = TimeSpan.FromMilliseconds(500);
@@ -123,15 +119,10 @@ namespace WintereenmasDelve2012
 		{
 			_storyTeller.StoryComplete -= OnQuestIntroductionStoryComplete;
 
-			_turnTakers.Clear();
-			foreach (Hero hero in _quest.Heroes)
-			{ _turnTakers.Add(hero); }
-			foreach (Monster monster in _quest.Monsters)
-			{ _turnTakers.Add(monster); }
+			List<Avatar> turnTakers = _quest.TurnTakers;
 
 			// Make the first person in the list the current player
-			_currentTurnTakerIndex = 0;
-			_currentTurnTaker = _turnTakers[_currentTurnTakerIndex];
+			_currentTurnTaker = turnTakers[0];
 			_currentTurnTaker.StartTurn();
 
 			_questAnalyzer = new QuestAnalyzer(_quest);
@@ -158,17 +149,22 @@ namespace WintereenmasDelve2012
 
 				if (action == null) // The current player has no more steps to take
 				{
-					_currentTurnTakerIndex++;
-					if (_currentTurnTakerIndex > _turnTakers.Count - 1)
-					{ _currentTurnTakerIndex = 0; }
-					_currentTurnTaker = _turnTakers[_currentTurnTakerIndex];
+					// Get the current turn takers' index
+
+					List<Avatar> turnTakers = _quest.TurnTakers;
+					int currentIndex = turnTakers.IndexOf(_currentTurnTaker);
+
+					currentIndex++;
+					if (currentIndex > turnTakers.Count - 1)
+					{ currentIndex = 0; }
+					_currentTurnTaker = turnTakers[currentIndex];
 					_currentTurnTaker.StartTurn();
 					PerformNextTurnCycle();
 				}
 				else
 				{
 					action.Complete += OnCurrentActionCommitComplete;
-					action.Commit(_quest, _storyTeller);
+					action.Commit(_quest, _storyTeller, _chanceProvider);
 				}
 
 				RenderQuestBoard();
