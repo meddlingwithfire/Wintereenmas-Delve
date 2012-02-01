@@ -19,16 +19,23 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 
 		override public TurnStepAction FindAction(Avatar currentAvatar, AvatarTurnState avatarTurnState, QuestAnalyzer mapAnalyzer, ChanceProvider chanceProvider)
 		{
-			List<Avatar> enemies = mapAnalyzer.GetAdjacentEnemies(currentAvatar, currentAvatar.CanAttackAdjacent);
-
-			if (enemies.Count <= 0)
-			{ return null; }
-
-			// TODO: Determine which enemy to attack
-
 			// Attack enemy action
-			AttackAction action = new AttackAction(currentAvatar, enemies[0]);
+			List<Avatar> enemies = mapAnalyzer.GetAdjacentEnemies(currentAvatar, currentAvatar.CanAttackAdjacent);
+			if (enemies.Count > 0)
+			{
+				// TODO: Determine which enemy to attack
+				return new AggressiveAttackAction(currentAvatar, enemies[0]);
+			}
+			
+			// Search for any visible enemies
+			enemies = mapAnalyzer.GetVisibleEnemies(currentAvatar);
+			if (enemies.Count <= 0)
+			{ return null; } // If there are no visible enemies, then this strategy passes.
+			
+			// TODO: Determine which enemy to attack
+			PointList path = mapAnalyzer.GetPathToEnemy(currentAvatar, enemies[0]);
 
+			MovementTurnStepAction action = new MovementTurnStepAction(currentAvatar, path);
 			return action;
 		}
 	}

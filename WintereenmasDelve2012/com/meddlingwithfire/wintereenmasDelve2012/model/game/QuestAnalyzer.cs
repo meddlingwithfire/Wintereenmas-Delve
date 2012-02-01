@@ -187,6 +187,24 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.game
 			return visibleEnemies;
 		}
 
+		public PointList GetPathToEnemy(Avatar observer, Avatar enemy)
+		{
+			Point observerLocation = _quest.GetAvatarLocation(observer);
+			Point enemyLocation = _quest.GetAvatarLocation(enemy);
+			
+			PathfindingNode observerNode = _quest.Map.GetPathfindingNodeForLocation(observerLocation.X, observerLocation.Y);
+			PathfindingNode enemyNode = _quest.Map.GetPathfindingNodeForLocation(enemyLocation.X, enemyLocation.Y);
+
+			List<PathfindingNode> path = _quest.Map.PathfindingGraph.FindRoute(observerNode, enemyNode);
+			if (path == null)
+			{ return null; }
+
+			PointList pathSteps = new PointList();
+			for (int i = 1; i < path.Count; i++)
+			{ pathSteps.Add(_quest.Map.GetPointForPathfindingNode(path[i])); }
+			return pathSteps;
+		}
+
 		private Boolean DoesListContainLocation(List<Point> list, int locationX, int locationY)
 		{
 			Boolean found = false;

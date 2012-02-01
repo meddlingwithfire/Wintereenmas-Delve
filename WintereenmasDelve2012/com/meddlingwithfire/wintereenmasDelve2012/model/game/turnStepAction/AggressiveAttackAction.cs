@@ -9,12 +9,12 @@ using WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.chance;
 
 namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model.game.turnStepAction
 {
-	public class AttackAction : TurnStepAction
+	public class AggressiveAttackAction : TurnStepAction
 	{
 		private Avatar _attacker;
 		private Avatar _defender;
 
-		public AttackAction(Avatar attacker, Avatar defender)
+		public AggressiveAttackAction(Avatar attacker, Avatar defender)
 			: base(false)
 		{
 			_attacker = attacker;
@@ -28,12 +28,18 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 
 		override public void Commit(AbstractQuest quest, StoryTeller storyTeller, ChanceProvider chanceProvider)
 		{
+			_attacker.TurnState.HasTakenAction = true;
+		
+			
 			int attackerAttackRoll =_attacker.RollAttack(chanceProvider);
 			int defenderDefendRoll = _defender.RollDefense(chanceProvider);
-			
 			int defenderDamageTaken = Math.Max(0, attackerAttackRoll - defenderDefendRoll);
 
 			_defender.TakeBodyDamage(defenderDamageTaken);
+			
+			// Aggressive attack action.  If the enemy is still alive, stand fast!
+			if (_defender.IsAlive || (_attacker.TurnState.MovementPointsLeft != _attacker.TurnState.TotalMovementPointsForTurn))
+			{ _attacker.TurnState.MovementPointsLeft = 0; }
 
 			Story story = new Story();
 			if (defenderDamageTaken <= 0)

@@ -45,11 +45,12 @@ namespace WintereenmasDelve2012.com.meddlingwithfire.wintereenmasDelve2012.model
 
 			HasMoreTurns = (_stepsToLocation.Count > 0) ? true : false; // If there are more steps, then we can be used in subsequent turns!
 			AcceptsAvatarFocus = HasMoreTurns;
+			_avatar.TurnState.MovementPointsLeft--;
 
 			_avatar.movementVector.X = moveToPoint.X - avatarCurrentLocation.X;
 			_avatar.movementVector.Y = moveToPoint.Y - avatarCurrentLocation.Y;
 			
-			_avatar.TurnState.MovementPointsLeft--;
+			
 
 			// Move the tile
 			quest.Map.MoveMapTile(avatarTile, moveToPoint);
